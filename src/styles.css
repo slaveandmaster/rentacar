@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('../src/assets/bootstrap_cerulean.min.css');
+@import url('../src/assets/style.css');
+
+.container {
+    width: 100%;
+    margin: auto;
+    padding-bottom: 4.5em;
+    padding-top: 15px;
+    
+    
+    
+}
