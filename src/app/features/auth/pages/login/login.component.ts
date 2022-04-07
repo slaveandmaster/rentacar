@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -20,7 +21,12 @@ export class LoginComponent implements OnInit {
    errorMessage = "";
    isAdmin = false;
 
-  constructor(private authService : AuthService, private tokenStorage: TokenStorageService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private authService : AuthService, 
+    private tokenStorage: TokenStorageService, 
+    private router: Router, 
+    private formBuilder: FormBuilder,
+    private notifyService: NotificationService
+    ) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -40,11 +46,13 @@ export class LoginComponent implements OnInit {
           this.isLoggedIn = true;
           this.isLogginFailed = false;
           this.isAdmin = this.tokenStorage.getUser().isAdmin;
+          this.notifyService.showSuccess('Successfully Login','Login');
           this.router.navigate(['/profile']);
         },
         error: err => {
           this.errorMessage = err.error.message;
           this.isLogginFailed = true;
+         this.notifyService.showError(this.errorMessage,'Login');
         }
     })
   }

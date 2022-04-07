@@ -1,6 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,11 +11,18 @@ import { HeaderComponent } from './core/header/header.component';
 import { AuthModule } from './features/auth/auth.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { AuthInterceptor} from './interceptors/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './pages/home/home.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -22,7 +30,9 @@ import { AuthInterceptor} from './interceptors/auth.interceptor';
     AuthModule,
     CoreModule,
     DashboardModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     {
