@@ -5,6 +5,7 @@ import { CarsListItemComponent } from './cars-list-item/cars-list-item.component
 import { CarsListComponent } from './cars-list/cars-list.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
 import { CarsNewComponent } from './cars-new/cars-new.component';
+import { CarsRoutingModule } from './cars-routing.module';
 
 
 
@@ -17,7 +18,8 @@ import { CarsNewComponent } from './cars-new/cars-new.component';
     CarsNewComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CarsRoutingModule
   ]
 })
 export class CarsModule { }

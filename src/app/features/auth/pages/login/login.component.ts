@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-login',
@@ -11,27 +12,27 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-   
-   loginFormGroup: FormGroup = this.formBuilder.group({
+
+  loginFormGroup: FormGroup = this.formBuilder.group({
     email: new FormControl('', [Validators.required]),
     password: new FormControl(null, [Validators.required, Validators.minLength(5)])
   });
-   isLoggedIn = false;
-   isLogginFailed = false;
-   errorMessage = "";
-   isAdmin = false;
+  isLoggedIn = false;
+  isLogginFailed = false;
+  errorMessage = "";
+  isAdmin = false;
 
-  constructor(private authService : AuthService, 
-    private tokenStorage: TokenStorageService, 
-    private router: Router, 
+  constructor(private authService: AuthService,
+    private tokenStorage: TokenStorageService,
+    private router: Router,
     private formBuilder: FormBuilder,
-    private notifyService: NotificationService
-    ) { }
+    private notifyService: NotificationService,
+  ) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-     // this.isAdmin = this.tokenStorage.getUser().isAdmin;
+      // this.isAdmin = this.tokenStorage.getUser().isAdmin;
     }
   }
 
@@ -39,21 +40,22 @@ export class LoginComponent implements OnInit {
     console.log(this.loginFormGroup);
     const { email, password } = this.loginFormGroup.value;
     this.authService.login(email, password).subscribe({
-        next: data => {
-          console.log(data);
-          this.tokenStorage.saveToken(data.JWT);
-          this.tokenStorage.saveUser(data.content);
-          this.isLoggedIn = true;
-          this.isLogginFailed = false;
-          this.isAdmin = this.tokenStorage.getUser().isAdmin;
-          this.notifyService.showSuccess('Successfully Login','Login');
-          this.router.navigate(['/profile']);
-        },
-        error: err => {
-          this.errorMessage = err.error.message;
-          this.isLogginFailed = true;
-         this.notifyService.showError(this.errorMessage,'Login');
-        }
+      next: data => {
+        console.log(data);
+        this.tokenStorage.saveToken(data.JWT);
+        this.tokenStorage.saveUser(data.content);
+        this.isLoggedIn = true;
+        this.isLogginFailed = false;
+        this.isAdmin = this.tokenStorage.getUser().isAdmin;
+        this.notifyService.showSuccess('Successfully Login', 'Success');
+        this.router.navigate(['/profile']);
+      },
+      error: err => {
+        this.errorMessage = err.error.error;
+        this.isLogginFailed = true;
+
+        this.notifyService.showError(this.errorMessage, 'Warning');
+      }
     })
   }
 }
