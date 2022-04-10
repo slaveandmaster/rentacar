@@ -6,6 +6,7 @@ import { CarsListComponent } from './cars-list/cars-list.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
 import { CarsNewComponent } from './cars-new/cars-new.component';
 import { CarsRoutingModule } from './cars-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,9 @@ import { CarsRoutingModule } from './cars-routing.module';
   ],
   imports: [
     CommonModule,
-    CarsRoutingModule
+    CarsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CarsModule { }

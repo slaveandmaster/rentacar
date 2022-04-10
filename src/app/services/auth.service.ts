@@ -49,4 +49,10 @@ export class AuthService {
   get isLogged() {
     return this.currentUser;
   }
+
+  refreshToken(token: string) {
+    return this.http.post(API_URL + 'refresh', {
+      refreshToken: token
+    }, httpOptions)
+  }
 }

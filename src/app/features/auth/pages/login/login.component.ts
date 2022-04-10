@@ -37,13 +37,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.loginFormGroup);
+    
     const { email, password } = this.loginFormGroup.value;
     this.authService.login(email, password).subscribe({
       next: data => {
         console.log(data);
         this.tokenStorage.saveToken(data.JWT);
         this.tokenStorage.saveUser(data.content);
+        this.tokenStorage.saveRefreshToken(data.refresh)
         this.isLoggedIn = true;
         this.isLogginFailed = false;
         this.isAdmin = this.tokenStorage.getUser().isAdmin;
