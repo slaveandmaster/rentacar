@@ -15,6 +15,38 @@
       </li>
     </ul>
   </div>
+  <!-- <div *ngFor="let rent of myRents">
+    <p>{{rent.car['model']}}</p>
+    <p>{{rent.user['email']}}</p>
+    <p>{{rent.date}}</p>
+    <p>{{rent.days}}</p>
+    <p>{{rent.total}}</p>
+  </div> -->
+
+  <table class="table caption-top">
+    <caption>List of User Rents</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Car</th>
+        <th scope="col">Email</th>
+        <th scope="col">Date</th>
+        <th scope="col">Days</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let rent of myRents ; let idx = index">
+        <th scope="row">{{idx}}</th>
+        <td>{{rent.car['model']}}</td>
+        <td>{{rent.user['email']}}</td>
+        <td>{{rent.date}}</td>
+        <td>{{rent.days}}</td>
+        <td>{{rent.total}} Euros</td>
+      </tr>
+    </tbody>
+  </table>
+
   <ng-template #loggedOut>
     Please login.
   </ng-template>

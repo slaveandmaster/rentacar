@@ -44,6 +44,7 @@
                 </ng-container>
                 <ng-container *ngIf="isLogged">
                     <a [routerLink]="['/profile']" class="nav-item nav-link">Profile [ {{currentUser['email']}} ]</a>
+                    <a *ngIf="isAdmin" [routerLink]="['/dashboard']" class="nav-item nav-link">Dashboard</a>
                     <a href (click)="logout()" class="nav-item nav-link">Logout</a>    
                 </ng-container>
             </div>

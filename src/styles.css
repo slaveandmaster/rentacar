@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('../src/assets/bootstrap_cerulean.min.css');
+@import url('../src/assets/bootstrap_sandstone.min.css');
+@import url('../src/assets/lib/animate/animate.min.css');
+@import url('../src/assets/lib/owlcarousel/assets/owl.carousel.min.css');
+@import url('../src/assets/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css');
 @import url('../src/assets/style.css');
 
 .container {

@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit {
   get currentUser() {
     return this.tokenService.getUser()
   }
+  get isAdmin() {
+    return this.tokenService.getUser().isAdmin;
+  }
   ngOnInit(): void {
   }
   logout(): void {

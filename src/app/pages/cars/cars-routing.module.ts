@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CheckLoginGuard } from 'src/app/guards/check-login.guard';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
 import { CarsNewComponent } from './cars-new/cars-new.component';
 import { CarsPageComponent } from './cars-page/cars-page.component';
@@ -8,15 +9,18 @@ import { CarsPageComponent } from './cars-page/cars-page.component';
 const routes: Routes = [
   {
     path: 'cars',
-    component: CarsPageComponent
+    component: CarsPageComponent,
+    canActivate: [CheckLoginGuard]
 },
 {
   path: 'cars/:id',
-  component: CarsDetailsComponent
+  component: CarsDetailsComponent,
+  canActivate: [CheckLoginGuard]
 },
 {
   path: 'cars/new',
-  component: CarsNewComponent
+  component: CarsNewComponent,
+  canActivate: [CheckLoginGuard]
 },
 ];
 

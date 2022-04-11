@@ -1,1 +1,44 @@
-<p>dashboard works!</p>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    
+                    <a [routerLink]="['users']"> <h2 class="text-right"><i class="fa fa-users f-right"></i><span>Users</span></h2></a>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    
+                    <a [routerLink]="['cars']"> <h2 class="text-right"><i class="fa fa-car f-right"></i><span>Cars</span></h2></a>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    
+                   <a [routerLink]="['cars-brand']"> <h2 class="text-right"><i class="fa fa-rocket f-right"></i><span>Car Brand</span></h2></a>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                    
+                    <a [routerLink]="['cars-type']"><h2 class="text-right"><i class="fa fa-rocket f-right"></i><span>Car Type</span></h2></a>
+                    
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

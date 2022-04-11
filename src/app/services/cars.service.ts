@@ -15,7 +15,7 @@ export class CarsService {
   constructor(private http: HttpClient) { }
 
   getAllCars$(): Observable<any> {
-    return this.http.get(API_URL, { responseType: 'text'});
+    return this.http.get(API_URL + '/all', { responseType: 'text'});
   }
 
   getCarById$(id: string): Observable<any> {
@@ -33,6 +33,10 @@ export class CarsService {
   }
   updateCar$(data:any, id:string): Observable<any> {
     return this.http.put(API_URL + '/' + id, data).pipe(catchError(this.errorHandler)); 
+  }
+
+  getTopRentCar$(): Observable<any> {
+    return this.http.get(API_URL + '/top', { responseType: 'text'}).pipe(catchError(this.errorHandler));
   }
   //catch errors
   errorHandler(error:any) {
