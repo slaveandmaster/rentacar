@@ -23,7 +23,8 @@
     <p>{{rent.total}}</p>
   </div> -->
 
-  <table class="table caption-top">
+
+  <table class="table caption-top"*ngIf="myRents.length != 0; else noRentItem">
     <caption>List of User Rents</caption>
     <thead>
       <tr>
@@ -47,6 +48,9 @@
     </tbody>
   </table>
 
+  <ng-template #noRentItem>
+    <p>No Rents</p>
+  </ng-template>
   <ng-template #loggedOut>
-    Please login.
+    <p>Logout</p>
   </ng-template>

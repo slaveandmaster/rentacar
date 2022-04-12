@@ -1,1 +1,70 @@
-<p>cars-brand works!</p>
+<button class="btn btn-primary" (click)="showAddForm()">Add Brand</button>
+<table class="table caption-top" *ngIf="brands.length !=0;else noBrandItem"> 
+    <caption>List of Car Brands</caption>
+    <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Action</th>
+         
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let brand of brands ; let idx = index">
+          <th scope="row">{{idx}}</th>
+          <td>{{brand.name}}</td>
+          <td><button class="btn btn-warning" (click)="showEdit(brand._id)" *ngIf="!isClickEdit">Edit</button><button class="btn btn-danger" (click)="deleteBrand(brand._id)"> Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+        <div class="submit-form" *ngIf="isClickAdd && !!brands">
+          <form [formGroup]="brandForm" novalidate>
+            <div >
+              <div class="form-group">
+                <label for="type">Brand</label>
+                <input
+                type="text"
+                class="form-control"
+                id="name"
+                required
+               
+                name="name"
+                formControlName="name"
+                />
+              </div>
+              <button  class="btn btn-success"  (click)="addBrand()">Save</button>
+        <button class="btn btn-danger" (click)="cancelAdd()"> Cancel </button>
+      </div>
+    </form>
+    
+  </div>
+  <div>
+    <div class="submit-form" *ngIf="isClickEdit && !!brandInfo">
+      <form [formGroup]="brandForm" novalidate>
+        <div >
+          <div class="form-group">
+            <label for="type">Brand</label>
+            <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            name="name"
+            formControlName="name"
+            [(ngModel)]="brandInfo.name"
+            />
+          </div>
+          <button  class="btn btn-success"  (click)="updateBrand(brandInfo._id)">Save</button>
+    <button class="btn btn-danger" (click)="cancelEdit()"> Cancel </button>
+  </div>
+</form>
+
+</div>
+    <ng-template #noBrandItem>
+        <div>
+            <p>No Items</p>
+        </div>
+        
+      </ng-template>
+ <!-- Must Create edit form with data -->

@@ -1,1 +1,70 @@
-<p>cars-type works!</p>
+<button class="btn btn-primary" (click)="showAddForm()">Add Type Car</button>
+<table class="table caption-top" *ngIf="types.length !=0;else noTypeItem"> 
+    <caption>List of Car Types</caption>
+    <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Car Type</th>
+          <th scope="col">Action</th>
+         
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let type of types ; let idx = index">
+          <th scope="row">{{idx}}</th>
+          <td>{{type.name}}</td>
+          <td><button class="btn btn-warning" (click)="showEdit(type._id)" *ngIf="!isClickEdit">Edit</button><button class="btn btn-danger" (click)="deleteType(type._id)"> Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+        <div class="submit-form" *ngIf="isClickAdd && !!types">
+          <form [formGroup]="typeForm" novalidate>
+            <div >
+              <div class="form-group">
+                <label for="type">Brand</label>
+                <input
+                type="text"
+                class="form-control"
+                id="name"
+                required
+               
+                name="name"
+                formControlName="name"
+                />
+              </div>
+              <button  class="btn btn-success"  (click)="addType()">Save</button>
+        <button class="btn btn-danger" (click)="cancelAdd()"> Cancel </button>
+      </div>
+    </form>
+    
+  </div>
+  <div>
+    <div class="submit-form" *ngIf="isClickEdit && !!typesInfo">
+      <form [formGroup]="typeForm" novalidate>
+        <div >
+          <div class="form-group">
+            <label for="type">Brand</label>
+            <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            name="name"
+            formControlName="name"
+            [(ngModel)]="typesInfo.name"
+            />
+          </div>
+          <button  class="btn btn-success"  (click)="updateType(typesInfo._id)">Save</button>
+    <button class="btn btn-danger" (click)="cancelEdit()"> Cancel </button>
+  </div>
+</form>
+
+</div>
+    <ng-template #noTypeItem>
+        <div>
+            <p>No Items</p>
+        </div>
+        
+      </ng-template>
+ <!-- Must Create edit form with data -->

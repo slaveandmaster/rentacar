@@ -33,7 +33,7 @@ export class AuthService {
       email,
       password
     }, httpOptions).pipe(
-      tap(response => console.log(response)),
+     // tap(response => console.log(response)),
       map(response => response),
       tap(user => this.currentUser = user)
     );

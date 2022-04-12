@@ -1,9 +1,7 @@
-
-{{userInfo | json}}
-<table class="table caption-top">
-    <caption>List of Users</caption>
-    <thead>
-      <tr>
+<table class="table caption-top"> 
+  <caption>List of Users</caption>
+  <thead>
+    <tr>
         <th scope="col">#</th>
         <th scope="col">Email</th>
         <th scope="col">isAdmin</th>
@@ -22,11 +20,11 @@
   </table>
   <div>
     <div class="submit-form" *ngIf="isClickEdit && !!userInfo">
-        <form [formGroup]="editForm" novalidate>
-      <div >
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
+      <form [formGroup]="editForm" novalidate>
+        <div >
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
             type="text"
             class="form-control"
             id="email"
@@ -35,18 +33,18 @@
             name="email"
             formControlName="email"
             [(ngModel)]="userInfo.email"
-          />
-        </div>
+            />
+          </div>
         <div class="form-group">
           <label for="password">Password</label>
           <input
-            class="form-control"
-            id="password"
-            required
-            type="password"
-            name="password"
-            formControlName="password"
-            
+          class="form-control"
+          id="password"
+          required
+          type="password"
+          name="password"
+          formControlName="password"
+          
           />
         </div>
         <ng-container
@@ -55,9 +53,9 @@
                 Password is required!
             </p>
             <p *ngIf="editForm.controls['password'].errors" class="error">
-                Password must be at least 5 characters!
+              Password must be at least 5 characters!
             </p>
-        </ng-container>
+          </ng-container>
         <div class="form-group">
             <label for="isAdmin">is Admin </label>
             <div *ngIf="userInfo.isAdmin;else notAdminTemplate">
@@ -68,25 +66,26 @@
                   formControlName="isAdmin"
                   (change)="onCheckChange($event)"
                   value="false"
-                />
+                  />
             </div>
           </div>
         <button  class="btn btn-success"  (click)="updateUser(userInfo._id)">Update</button>
         <button class="btn btn-danger" (click)="cancelEdit()"> Cancel </button>
       </div>
     </form>
-    </div>
-    
   </div>
+  
+</div>
+<button class="btn btn-primary" [routerLink]="['/dashboard']" *ngIf="!isClickEdit">Back to Dashboard</button>
   <ng-template #notAdminTemplate>
       <div>
-    <input type="checkbox"
-    id="isAdmin"
-    name="isAdmin"
+        <input type="checkbox"
+        id="isAdmin"
+        name="isAdmin"
     (change)="onCheckChange($event)"
     value="true"
-   
-     />
-    </div>
+    
+    />
+  </div>
   </ng-template>
-  <!-- Cecko: da dovursha update zaqvkite v service i da testvam -->
+  

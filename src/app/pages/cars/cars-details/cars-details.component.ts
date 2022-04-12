@@ -55,8 +55,8 @@ export class CarsDetailsComponent implements OnInit {
         //update car status to isRented true and rent raiting
         let data = {
           isRented: true
-        }
-        ;
+        };
+        
         
          let updateCar$ = this.carService.updateCar$(data, this.cardId);
         // this.userData  = sessionStorage.getItem('auth-user');
