@@ -58,9 +58,9 @@ export class CarsComponent implements OnInit {
       this.carInfo = car.car;
     })
     this.isClickEdit = !this.isClickEdit;
-    
+
   }
-  
+
   cancelEdit(): void {
     this.isClickEdit = !this.isClickEdit;
   }
@@ -80,7 +80,7 @@ export class CarsComponent implements OnInit {
       numberInStock: this.carForm.value.licenseNumber.trim(),
       airConditioner: this.carForm.value.air,
     }
-    
+
     this.carService.updateCarInfo$(id, data).pipe(
       switchMap(() => this.carService.getAllCars$())
     ).subscribe({
@@ -89,15 +89,25 @@ export class CarsComponent implements OnInit {
         this.cancelEdit();
         this.notifyService.showSuccess('Car was Updated!', 'Success');
       },
-      error: err =>{
+      error: err => {
         console.log(err);
-        this.notifyService.showError(err.message,'Alert');
+        this.notifyService.showError(err.message, 'Alert');
       }
     })
   }
   //TODO DELETE
   deleteCar(id: string): void {
-
+    this.carService.deleteCarById$(id).pipe(
+      switchMap(() => this.carService.getAllCars$())
+    ).subscribe({
+      next: data => {
+        this.cars = JSON.parse(data);
+        this.notifyService.showSuccess('Successfully deleted!', 'Success');
+      },
+      error: err => {
+        this.notifyService.showError('Something wrong', 'Alert');
+      }
+    })
   }
   //TODO ADD
   addCar(): void {
@@ -114,7 +124,7 @@ export class CarsComponent implements OnInit {
       numberInStock: this.carForm.value.licenseNumber.trim(),
       airConditioner: this.carForm.value.air.trim(),
     }
-    
+
     if (this.carForm.valid) {
       this.carService.addCar$(data).subscribe({
         next: data => {
@@ -139,14 +149,14 @@ export class CarsComponent implements OnInit {
   get f() {
     return this.carForm.controls;
   }
-  
- //get checkbox value
+
+  //get checkbox value
   onCheckChange(e: any): void {
-    let isAir = e.target.value ? 'true': false;
+    let isAir = e.target.value ? 'true' : false;
     if (e.target.checked) {
       this.carForm.controls['air'].setValue(isAir);
     } else {
-      this.carForm.controls['air'].setValue(isAir);
+      this.carForm.controls['air'].setValue(false);
 
     }
   }
@@ -157,7 +167,7 @@ export class CarsComponent implements OnInit {
     })
     this.selectedItem = e.target.value;
   }
-//get type from select menu
+  //get type from select menu
   onChangeType(e: any) {
     this.carForm.get('type')?.setValue(e.target.value, {
       onlySelf: true

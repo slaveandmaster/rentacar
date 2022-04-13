@@ -1,4 +1,4 @@
-<button class="btn btn-primary" (click)="showAddForm()">Add Car</button>
+<button class="btn btn-primary" (click)="showAddForm()" *ngIf="!isClickEdit">Add Car</button>
 <table class="table caption-top" *ngIf="cars.length !=0 && !isClickAdd && !isClickEdit;else noCarsItem"> 
     <caption>List of Car Types</caption>
     <thead>
@@ -235,7 +235,7 @@
 </div>
 <div class="form-group">
 <label for="air">Air Conditioner</label>
-  <input type="checkbox" class="form-check-input" id="air" name="air" checked  formControlName="air" (change)="onCheckChange($event)" [(ngModel)]="carInfo.airConditioner" />
+  <input type="checkbox" class="form-check-input" id="air" name="air" formControlName="air" (change)="onCheckChange($event)" [(ngModel)]="carInfo.airConditioner" />
 </div>
 <div class="form-group mt-2">
 
@@ -245,7 +245,7 @@
 </div>
 </form>
 </ng-container>
-{{carInfo | json}}
+
 <!-- Template if no records in database -->
     <ng-template #noCarsItem>
         <div  *ngIf="!isClickAdd && !isClickEdit">
