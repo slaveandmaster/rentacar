@@ -14,6 +14,7 @@ import { AuthInterceptor} from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { AboutComponent } from './pages/about/about.component';
 //import { CarsModule } from './pages/cars/cars.module';
 
 
@@ -23,6 +24,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
+    AboutComponent,
     
   ],
   imports: [
