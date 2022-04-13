@@ -95,7 +95,7 @@ export class CarsComponent implements OnInit {
       }
     })
   }
-  //TODO DELETE
+  //delete car
   deleteCar(id: string): void {
     this.carService.deleteCarById$(id).pipe(
       switchMap(() => this.carService.getAllCars$())
@@ -109,7 +109,7 @@ export class CarsComponent implements OnInit {
       }
     })
   }
-  //TODO ADD
+  //Add Car
   addCar(): void {
     const data = {
       model: this.carForm.value.model.trim(),

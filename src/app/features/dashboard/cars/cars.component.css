@@ -8,3 +8,10 @@ p.error {
     color: red;
     padding-top: 0;
 }
+.img {
+    width: 30%;
+    height: 30%;
+}
+.carImg {
+    width: 25%;
+}

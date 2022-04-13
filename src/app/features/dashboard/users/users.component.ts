@@ -42,14 +42,16 @@ export class UsersComponent implements OnInit {
   get f() {
     return this.editForm.value;
   }
-
+//show edit form and load data
   showEdit(id: string): void {
     this.userService.getUserData$(id).subscribe(user => this.userInfo = user)
     this.isClickEdit = !this.isClickEdit;
   }
+  //hide edit form
   cancelEdit(): void {
     this.isClickEdit = !this.isClickEdit;
   }
+  //get checked value
   onCheckChange(e: any): void {
     if (e.target.checked) {
       this.editForm.controls['isAdmin'].setValue(e.target.value);
@@ -59,7 +61,7 @@ export class UsersComponent implements OnInit {
     }
 
   }
-
+//update user info
   updateUser(id: string): void {
 
     const data = {
