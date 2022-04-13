@@ -38,7 +38,7 @@ export class CarsBrandComponent implements OnInit {
     this.isClickAdd = !this.isClickAdd;
   }
   addBrand(): void {
-    console.log(this.brandForm.value)
+    //console.log(this.brandForm.value)
     const data = {
       name: this.brandForm.value.name.trim()
     }

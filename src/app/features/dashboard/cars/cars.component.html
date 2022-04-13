@@ -1,1 +1,255 @@
-<p>cars works!</p>
+<button class="btn btn-primary" (click)="showAddForm()">Add Car</button>
+<table class="table caption-top" *ngIf="cars.length !=0 && !isClickAdd && !isClickEdit;else noCarsItem"> 
+    <caption>List of Car Types</caption>
+    <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Car Img</th>
+          <th scope="col">Car Model</th>
+          <th scope="col">Car Type</th>
+          <th scope="col">Car Brand</th>
+          <th scope="col">Car Year</th>
+          <th scope="col">Car Doors</th>
+          <th scope="col">Car Seats</th>
+          <th scope="col">Car Transmission</th>
+          <th scope="col">Car Air</th>
+          <th scope="col">Car LN</th>
+          <th scope="col">Car Price</th>
+          <th scope="col">Rented</th>
+          <th scope="col">Action</th>
+         
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let car of cars ; let idx = index">
+          <th scope="row">{{idx}}</th>
+          <td>{{car.image}}</td>
+          <td>{{car.model}}</td>
+          <td>{{car['type'].name}}</td>
+          <td>{{car['brand'].name}}</td>
+          <td>{{car.year}}</td>
+          <td>{{car.numberOfDoors}}</td>
+          <td>{{car.numberOfSeats}}</td>
+          <td>{{car.transmission}}</td>
+          <td>{{car.airConditioner ? 'Yes': 'No'}}</td>
+          <td>{{car.numberInStock}}</td>
+          <td>{{car.price}}</td>
+          <td>{{car.isRented ? 'Rented': 'Free'}}</td>
+
+          <td><button class="btn btn-warning" (click)="showEdit(car._id)" *ngIf="!isClickEdit">Edit</button><button class="btn btn-danger" (click)="deleteCar(car._id)"> Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Add Form -->
+    <ng-container *ngIf="isClickAdd">
+      <form [formGroup]="carForm" (ngSubmit)="addCar()" novalidate>
+        <div class="form-group row">
+          <div class="form-group">
+            <label class="form-label" for="model">Car Model: </label>
+        <input class="form-control"  type="text" name="model" placeholder="VW" formControlName="model">
+        <ng-container *ngIf="f['model'].errors && f['model'].touched || f['model'].dirty">
+            <p *ngIf="f['model'].errors?.['required']" class="error">
+                Name is required!
+            </p>
+        </ng-container>
+        </div>
+           <div class="form-group">
+               <label for="brand">Car Brand:</label>
+               <select formControlName="brand" (change)="onChangeBrand($event)" class="form-control">
+                 <option>Select Car Brand</option>                             
+                   <option *ngFor="let brand of brands" value="{{brand._id}}">{{brand.name}}</option>
+               </select>
+            </div>
+            <div class="form-group">
+              <label for="type">Car Type:</label>
+              <select formControlName="type" class="form-control">
+                <option disabled>Select Car Type</option>                             
+                  <option *ngFor="let type of types" value="{{type._id}}">{{type.name}}</option>
+              </select>
+           </div>
+    <div class="form-group">
+       <label class="form-label" for="names">Image: </label>
+   <input class="form-control"  type="text" name="image" placeholder="Link to image" formControlName="image">
+   <ng-container *ngIf="f['image'].errors && f['image'].touched || f['image'].dirty">
+       <p *ngIf="f['image'].errors?.['required']" class="error">
+           Image is required!
+       </p>
+   </ng-container>
+   </div>
+   <div class="form-group">
+       <label class="form-label" for="date">Year: </label>
+   <input class="form-control" type="text" name="year" placeholder="year" formControlName="year">
+   <ng-container *ngIf="f['year'].errors && f['year'].touched || f['year'].dirty">
+       <p *ngIf="f['year'].errors?.['required']" class="error">
+           year is required!
+       </p>
+   </ng-container>
+   </div>
+   <div class="form-group">
+       <label class="form-label" for="seats">Seats: </label>
+   <input class="form-control" type="text"  name="seats" placeholder="number of seats" formControlName="seats">
+   <ng-container *ngIf="f['seats'].errors && f['seats'].touched || f['seats'].dirty">
+       <p *ngIf="f['seats'].errors?.['required']" class="error">
+           Seats is required!
+       </p>
+   </ng-container>
+   </div>
+   <div class="form-group">
+    <label class="form-label" for="seats">Doors: </label>
+<input class="form-control" type="text"  name="doors" placeholder="number of doors" formControlName="doors">
+<ng-container *ngIf="f['doors'].errors && f['doors'].touched || f['doors'].dirty">
+    <p *ngIf="f['doors'].errors?.['required']" class="error">
+        Doors is required!
+    </p>
+</ng-container>
+</div>
+<div class="form-group">
+  <label class="form-label" for="seats">Transmission: </label>
+<input class="form-control" type="text"  name="transmission" placeholder="Manual or Automatic" formControlName="transmission">
+<ng-container *ngIf="f['transmission'].errors && f['transmission'].touched || f['transmission'].dirty">
+  <p *ngIf="f['transmission'].errors?.['required']" class="error">
+      Transmission is required!
+  </p>
+</ng-container>
+</div>
+<div class="form-group">
+  <label class="form-label" for="seats">License Number: </label>
+<input class="form-control" type="text"  name="licenseNumber" placeholder="LN" formControlName="licenseNumber">
+<ng-container *ngIf="f['licenseNumber'].errors && f['licenseNumber'].touched || f['licenseNumber'].dirty">
+  <p *ngIf="f['licenseNumber'].errors?.['required']" class="error">
+      License Number is required!
+  </p>
+</ng-container>
+</div>
+<div class="form-group">
+  <label class="form-label" for="seats">Rent Price for Day: </label>
+<input class="form-control" type="text"  name="price" placeholder="price for day" formControlName="price">
+<ng-container *ngIf="f['price'].errors && f['price'].touched || f['price'].dirty">
+  <p *ngIf="f['price'].errors?.['required']" class="error">
+      Price is required!
+  </p>
+</ng-container>
+</div>
+<div class="form-group">
+  <label for="air">Air Conditioner</label>
+      <input type="checkbox" class="form-check-input" id="air" name="air" checked  formControlName="air" (change)="onCheckChange($event)" />
+</div>
+<div class="form-group mt-2">
+  
+  <button type="submit" class="btn btn-primary padding-top" name="reserve" (ngSubmit)="addCar()" id="reserve" [disabled]="carForm.invalid">Reserve</button>
+  <button type="button" class="btn btn-danger padding-top" name="cancel" (click)="cancelAdd()" id="cancel">Cancel</button>
+</div>
+</div>
+</form>
+</ng-container>
+<!-- Edit Form -->
+
+<ng-container *ngIf="isClickEdit && !!carInfo">
+  <form [formGroup]="carForm" (ngSubmit)="updateCar(carInfo._id)" novalidate>
+    <div class="form-group row">
+      <div class="form-group">
+        <label class="form-label" for="model">Car Model: </label>
+    <input class="form-control"  type="text" name="model" placeholder="VW" formControlName="model" [(ngModel)]="carInfo.model" required>
+    <ng-container *ngIf="f['model'].errors && f['model'].touched || f['model'].dirty">
+        <p *ngIf="f['model'].errors?.['required']" class="error">
+            Model is required!
+        </p>
+    </ng-container>
+    </div>
+       <div class="form-group">
+           <label for="brand">Car Brand:</label>
+           <select formControlName="brand" (change)="onChangeBrand($event)" [(ngModel)]="carInfo['brand']._id" class="form-control" required>
+             <option>Select Car Brand</option>                            
+               <option *ngFor="let brand of brands" value="{{brand._id}}">{{brand.name}}</option>
+           </select>
+        </div>
+        <div class="form-group">
+          <label for="type">Car Type:</label>
+          <select formControlName="type" class="form-control" [ngModel]="carInfo['type']._id">
+            <option disabled>Select Car Type</option>                             
+              <option *ngFor="let type of types" value="{{type._id}}">{{type.name}}</option>
+          </select>
+       </div>
+<div class="form-group">
+   <label class="form-label" for="names">Image: </label>
+<input class="form-control"  type="text" name="image" placeholder="Link to image" formControlName="image" [(ngModel)]="carInfo.image" required>
+<ng-container *ngIf="f['image'].errors && f['image'].touched || f['image'].dirty">
+   <p *ngIf="f['image'].errors?.['required']" class="error">
+       Image is required!
+   </p>
+</ng-container>
+</div>
+<div class="form-group">
+   <label class="form-label" for="date">Year: </label>
+<input class="form-control" type="text" name="year" placeholder="year" formControlName="year" [(ngModel)]="carInfo.year" required>
+<ng-container *ngIf="f['year'].errors && f['year'].touched || f['year'].dirty">
+   <p *ngIf="f['year'].errors?.['required']" class="error">
+       year is required!
+   </p>
+</ng-container>
+</div>
+<div class="form-group">
+   <label class="form-label" for="seats">Seats: </label>
+<input class="form-control" type="text"  name="seats" placeholder="number of seats" formControlName="seats" [(ngModel)]="carInfo.numberOfSeats" required>
+<ng-container *ngIf="f['seats'].errors && f['seats'].touched || f['seats'].dirty">
+   <p *ngIf="f['seats'].errors?.['required']" class="error">
+       Seats is required!
+   </p>
+</ng-container>
+</div>
+<div class="form-group">
+<label class="form-label" for="seats">Doors: </label>
+<input class="form-control" type="text"  name="doors" placeholder="number of doors" formControlName="doors" [(ngModel)]="carInfo.numberOfDoors" required>
+<ng-container *ngIf="f['doors'].errors && f['doors'].touched || f['doors'].dirty">
+<p *ngIf="f['doors'].errors?.['required']" class="error">
+    Doors is required!
+</p>
+</ng-container>
+</div>
+<div class="form-group">
+<label class="form-label" for="seats">Transmission: </label>
+<input class="form-control" type="text"  name="transmission" placeholder="Manual or Automatic" formControlName="transmission" [(ngModel)]="carInfo.transmission">
+<ng-container *ngIf="f['transmission'].errors && f['transmission'].touched || f['transmission'].dirty">
+<p *ngIf="f['transmission'].errors?.['required']" class="error">
+  Transmission is required!
+</p>
+</ng-container>
+</div>
+<div class="form-group">
+<label class="form-label" for="seats">License Number: </label>
+<input class="form-control" type="text"  name="licenseNumber" placeholder="LN" formControlName="licenseNumber" [(ngModel)]="carInfo.numberInStock">
+<ng-container *ngIf="f['licenseNumber'].errors && f['licenseNumber'].touched || f['licenseNumber'].dirty">
+<p *ngIf="f['licenseNumber'].errors?.['required']" class="error">
+  License Number is required!
+</p>
+</ng-container>
+</div>
+<div class="form-group">
+<label class="form-label" for="seats">Rent Price for Day: </label>
+<input class="form-control" type="text"  name="price" placeholder="price for day" formControlName="price" [(ngModel)]="carInfo.price">
+<ng-container *ngIf="f['price'].errors && f['price'].touched || f['price'].dirty">
+<p *ngIf="f['price'].errors?.['required']" class="error">
+  Price is required!
+</p>
+</ng-container>
+</div>
+<div class="form-group">
+<label for="air">Air Conditioner</label>
+  <input type="checkbox" class="form-check-input" id="air" name="air" checked  formControlName="air" (change)="onCheckChange($event)" [(ngModel)]="carInfo.airConditioner" />
+</div>
+<div class="form-group mt-2">
+
+<button type="submit" class="btn btn-primary padding-top" name="reserve" (ngSubmit)="updateCar(carInfo._id)" id="update" [disabled]="carForm.invalid">Update</button>
+<button type="button" class="btn btn-danger padding-top" name="cancel" (click)="cancelEdit()" id="cancel">Cancel</button>
+</div>
+</div>
+</form>
+</ng-container>
+{{carInfo | json}}
+<!-- Template if no records in database -->
+    <ng-template #noCarsItem>
+        <div  *ngIf="!isClickAdd && !isClickEdit">
+            <p>No Items</p>
+        </div>
+        
+      </ng-template>

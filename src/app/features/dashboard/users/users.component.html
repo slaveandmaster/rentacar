@@ -14,7 +14,7 @@
         <th scope="row">{{idx}}</th>
         <td>{{user.email}}</td>
         <td>{{user.isAdmin ? 'Yes' : 'No'}}</td>
-        <td><button class="btn btn-warning" (click)="showEdit(user._id)" *ngIf="!isClickEdit">Edit</button><button class="btn btn-danger" [routerLink]="['/user', user._id]"> Delete</button></td>
+        <td><button class="btn btn-warning" (click)="showEdit(user._id)" *ngIf="!isClickEdit">Edit</button><button class="btn btn-danger" (click)="deleteUser(user._id)"> Delete</button></td>
       </tr>
     </tbody>
   </table>

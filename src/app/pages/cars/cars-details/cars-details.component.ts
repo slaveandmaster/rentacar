@@ -50,8 +50,8 @@ export class CarsDetailsComponent implements OnInit {
       return this.reserveForm.controls;
     }
     onSubmit(): void {
-        console.log(this.reserveForm.value)
-        const { names, date, days, car } = this.reserveForm.value;
+        
+        const { names, date, days, _car } = this.reserveForm.value;
         //update car status to isRented true and rent raiting
         let data = {
           isRented: true
@@ -59,8 +59,6 @@ export class CarsDetailsComponent implements OnInit {
         
         
          let updateCar$ = this.carService.updateCar$(data, this.cardId);
-        // this.userData  = sessionStorage.getItem('auth-user');
-         //this.id = JSON.parse(this.userData).id;
         // //add new rent
          let newRent$ = this.carService.rentCar$(this.cardId,names, date, days);
          forkJoin([updateCar$, newRent$]).subscribe(result => {

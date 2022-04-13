@@ -25,7 +25,7 @@ export class CarsService {
     return this.http.get(API_URL + '/' + id).
     pipe(catchError(this.errorHandler));
   }
- 
+ //rent
   rentCar$(car: string, names:string, date: string, days: string ): Observable<any> {
     return this.http.post('http://localhost:3000/api/rent/'+ car , {
       car,
@@ -37,7 +37,7 @@ export class CarsService {
   updateCar$(data:any, id:string): Observable<any> {
     return this.http.put(API_URL + '/' + id, data).pipe(catchError(this.errorHandler)); 
   }
-
+//home top rented
   getTopRentCar$(): Observable<any> {
     return this.http.get(API_URL + '/top', { responseType: 'text'}).pipe(catchError(this.errorHandler));
   }
@@ -80,6 +80,20 @@ export class CarsService {
 
   deleteTypeById$(id: string): Observable<any>{
     return this.http.delete(API_URL_TYPE + '/' + id).pipe(catchError(this.errorHandler));
+  }
+
+  //Add new Car
+  addCar$(data: any): Observable<any> {
+    return this.http.post(API_URL + '/new' , data ).pipe(catchError(this.errorHandler));
+  }
+
+  //update Car Details
+  updateCarInfo$(id:string, data:any): Observable<any> {
+    return this.http.put(API_URL + '/update' + id, data).pipe(catchError(this.errorHandler)); 
+  }
+  //delete car
+  deleteCarById$(id: string): Observable<any>{
+    return this.http.delete(API_URL + '/' + id).pipe(catchError(this.errorHandler));
   }
   //catch errors
   errorHandler(error:any) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,7 +15,7 @@ export class UsersComponent implements OnInit {
   userInfo: any;
   isClickEdit: boolean = false;
   editForm: FormGroup;
-  
+
 
   constructor(private userService: UserService, private notifyService: NotificationService, private router: Router) { }
 
@@ -54,7 +55,7 @@ export class UsersComponent implements OnInit {
       this.editForm.controls['isAdmin'].setValue(e.target.value);
     } else {
       this.editForm.controls['isAdmin'].setValue(false);
-      
+
     }
 
   }
@@ -69,11 +70,10 @@ export class UsersComponent implements OnInit {
     this.userService.updateUser$(id, data).subscribe({
       next: user => {
         console.log(user.status)
-        
       },
       error: err => {
         if (err.status == "200") {
-          
+
           this.notifyService.showSuccess('Successfully updated!', 'Success');
           this.router.navigate(['dashboard']);
           this.cancelEdit();
@@ -83,4 +83,20 @@ export class UsersComponent implements OnInit {
       }
     })
   }
+
+  deleteUser(id: string): void {
+    this.userService.deleteUserById$(id).pipe(
+      switchMap(() => this.userService.getAllUsers$())
+    ).subscribe({
+      next: data => {
+        this.users = data;
+        this.notifyService.showSuccess('Record was Deleted', 'Success');
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
 }
+//TODO ADD USER OPTIONAL
+//Use switchMap to update users records on edit delete ..

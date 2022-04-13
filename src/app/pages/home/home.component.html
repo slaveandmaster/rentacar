@@ -36,6 +36,7 @@
         </div>
     </div>
     <!-- Service End -->
+ <h2>Top Rented Cars</h2>
 <div class="row" id="ads" *ngIf="!!top">
 <div class="col-md-4" *ngFor="let t of top">
     <div class="card rounded">
@@ -43,14 +44,14 @@
             <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" alt="Alternate Text" />
         </div>
         <div class="card-image-overlay m-auto">
-            <span class="card-detail-badge">{{t.type}}</span>
+            <span class="card-detail-badge">{{t['type'].name}}</span>
             <span class="card-detail-badge">{{t.transmission}}</span>
             <span class="card-detail-badge">{{t.price}}</span>
         </div>
         <div class="card-body text-center">
-            <div class="ad-title m-auto">
-                <h5>{{t.model}}</h5>
-            </div>
+            
+                <h5>Rented: {{t.RentalRate}}</h5>
+            
             <a class="btn" [routerLink]="['/cars', t._id]">View</a>
         </div>
     </div>

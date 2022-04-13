@@ -30,3 +30,6 @@ p.error {
 .input-error {
     border-left-color: red;
 }
+.btn {
+    margin: 5px
+}
