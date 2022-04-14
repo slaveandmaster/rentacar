@@ -65,7 +65,7 @@ Show basic user info
 Show all user`s rent
 
 # Technologies and stuff
-Frontend
+## Frontend
 
 Angular 13
 
@@ -76,7 +76,7 @@ Fontawsome
 Ngx-Toastr
 
 
-Backend
+## Backend
 
 Mongoose
 
