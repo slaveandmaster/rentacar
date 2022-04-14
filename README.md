@@ -6,13 +6,21 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # General functionality:
 
 Authenticate users via JWT (login/signup pages + logout button on navigation menu)
+
 CRUD Users (sign up & settings page - management users from dashboard)
+
 CRUD Cars (add, read, delete, update cars)
+
 CRUD Car Brand
+
 CRUD Car Type Brand
+
 GET and display top rented car on home page
+
 GET and display catalog with all cars in invetory
+
 GET user profile rents and user information
+
 Simple Dashboard
 
 # The general page breakdown looks like this:
@@ -53,16 +61,22 @@ Show all user`s rent
 
 # Technologies and stuff
 Frontend
+
 Angular 13
+
 CSS
+
 Fontawsome
+
 Ngx-Toastr
 
 
 Backend
-MongoDB Compass
+
 Mongoose
+
 Node.JS
+
 Express
 ## Development server
 
