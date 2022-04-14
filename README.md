@@ -20,20 +20,35 @@ Simple Dashboard
 Home page (URL: /#/ )
 
 List of top rented cars and 
+
 simple info for the firm
+
 Sign in/Sign up pages and Logout (URL: /#/login, /#/register )
+
 Uses JWT (store the token in localStorage)
+
 Dashboard (URL: /#/dashboard )
+
 Manage Users
+
 Manage Cars
+
 Manage Car Brand
+
 Manage Car Type
+
 Cars page (URL: /#/cars )
+
 Show all cars from inventory
+
 Show car details
+
 Make reservation 
+
 Profile page (URL: /#/profile)
+
 Show basic user info
+
 Show all user`s rent
 
 # Technologies and stuff
