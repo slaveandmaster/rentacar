@@ -8,6 +8,7 @@ import { CarsComponent } from './cars/cars.component';
 import { CarsBrandComponent } from './cars-brand/cars-brand.component';
 import { CarsTypeComponent } from './cars-type/cars-type.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RentsPageComponent } from './rents-page/rents-page.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CarsComponent,
     CarsBrandComponent,
     CarsTypeComponent,
+    RentsPageComponent,
   ],
   imports: [
     CommonModule,

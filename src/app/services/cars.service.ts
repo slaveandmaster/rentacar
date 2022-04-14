@@ -4,6 +4,8 @@ import { catchError, Observable, throwError } from 'rxjs';
 const API_URL = 'http://localhost:3000/api/cars';
 const API_URL_BRAND = 'http://localhost:3000/api/brand';
 const API_URL_TYPE = 'http://localhost:3000/api/type';
+const API_URL_RENT = 'http://localhost:3000/api/rent';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +20,16 @@ export class CarsService {
   constructor(private http: HttpClient) { }
 
   getAllCars$(): Observable<any> {
-    return this.http.get(API_URL + '/all', { responseType: 'text' });
+    return this.http.get(API_URL + '/all', { responseType: 'text' }).pipe(catchError(this.errorHandler));
   }
 
   getCarById$(id: string): Observable<any> {
     return this.http.get(API_URL + '/' + id).
       pipe(catchError(this.errorHandler));
+  }
+  //get list with all rented cars
+  getAllRents$(): Observable<any> {
+    return this.http.get(API_URL_RENT + '/allrents', { responseType: 'text' }).pipe(catchError(this.errorHandler));
   }
   //rent
   rentCar$(car: string, names: string, date: string, days: string): Observable<any> {
@@ -34,6 +40,12 @@ export class CarsService {
       days,
     }).pipe(catchError(this.errorHandler))
   }
+  //delete rent car
+  deleteRentCar$(id:string): Observable<any> {
+    return this.http.delete(API_URL_RENT + '/' + id).pipe(catchError(this.errorHandler))
+  }
+
+  //update car
   updateCar$(data: any, id: string): Observable<any> {
     return this.http.put(API_URL + '/' + id, data).pipe(catchError(this.errorHandler));
   }

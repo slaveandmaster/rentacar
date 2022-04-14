@@ -1,0 +1,35 @@
+<table class="table caption-top" *ngIf="rentList.length !=0;else noRentsItem">
+    <caption>List of Car</caption>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Car Img</th>
+            <th scope="col">Car Model</th>
+            <th scope="col">Car Number</th>
+            <th scope="col">User Email</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Days</th>
+            <th scope="col">Price</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rent of rentList ; let idx = index">
+            <th scope="row">{{idx}}</th>
+            <td class="col-md-1"><img [src]="rent['car'].image" class="img-thumbnail"></td>
+            <td>{{rent['car'].model}}</td>
+            <td>{{rent['car'].numberInStock}}</td>
+            <td>{{rent['user'].email}}</td>
+            <td>{{rent.names}}</td>
+            <td>{{rent.date}}</td>
+            <td>{{rent.days}}</td>
+            <td>{{rent.total}}</td>
+            <td><button class="btn btn-sm btn-danger" (click)="deleteRent(rent._id)"> Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #noRentsItem>
+    <p>No Items</p>
+</ng-template>
