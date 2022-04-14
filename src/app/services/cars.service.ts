@@ -13,33 +13,33 @@ export class CarsService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  } 
-  
+  }
+
   constructor(private http: HttpClient) { }
 
   getAllCars$(): Observable<any> {
-    return this.http.get(API_URL + '/all', { responseType: 'text'});
+    return this.http.get(API_URL + '/all', { responseType: 'text' });
   }
 
   getCarById$(id: string): Observable<any> {
     return this.http.get(API_URL + '/' + id).
-    pipe(catchError(this.errorHandler));
+      pipe(catchError(this.errorHandler));
   }
- //rent
-  rentCar$(car: string, names:string, date: string, days: string ): Observable<any> {
-    return this.http.post('http://localhost:3000/api/rent/'+ car , {
+  //rent
+  rentCar$(car: string, names: string, date: string, days: string): Observable<any> {
+    return this.http.post('http://localhost:3000/api/rent/' + car, {
       car,
       names,
       date,
       days,
-  }).pipe(catchError(this.errorHandler))
+    }).pipe(catchError(this.errorHandler))
   }
-  updateCar$(data:any, id:string): Observable<any> {
-    return this.http.put(API_URL + '/' + id, data).pipe(catchError(this.errorHandler)); 
+  updateCar$(data: any, id: string): Observable<any> {
+    return this.http.put(API_URL + '/' + id, data).pipe(catchError(this.errorHandler));
   }
-//home top rented
+  //home top rented
   getTopRentCar$(): Observable<any> {
-    return this.http.get(API_URL + '/top', { responseType: 'text'}).pipe(catchError(this.errorHandler));
+    return this.http.get(API_URL + '/top', { responseType: 'text' }).pipe(catchError(this.errorHandler));
   }
 
   //-------Brand CRUD---------
@@ -54,11 +54,11 @@ export class CarsService {
   getBrandById$(id: string): Observable<any> {
     return this.http.get(API_URL_BRAND + '/' + id).pipe(catchError(this.errorHandler));
   }
-  updateBrandById$(id:string, data:any): Observable<any> {
+  updateBrandById$(id: string, data: any): Observable<any> {
     return this.http.put(API_URL_BRAND + '/' + id, data).pipe(catchError(this.errorHandler));
   }
 
-  deleteBrandById$(id: string): Observable<any>{
+  deleteBrandById$(id: string): Observable<any> {
     return this.http.delete(API_URL_BRAND + '/' + id).pipe(catchError(this.errorHandler));
   }
 
@@ -74,29 +74,29 @@ export class CarsService {
   getTypeById$(id: string): Observable<any> {
     return this.http.get(API_URL_TYPE + '/' + id).pipe(catchError(this.errorHandler));
   }
-  updateTypeById$(id:string, data:any): Observable<any> {
+  updateTypeById$(id: string, data: any): Observable<any> {
     return this.http.put(API_URL_TYPE + '/' + id, data).pipe(catchError(this.errorHandler));
   }
 
-  deleteTypeById$(id: string): Observable<any>{
+  deleteTypeById$(id: string): Observable<any> {
     return this.http.delete(API_URL_TYPE + '/' + id).pipe(catchError(this.errorHandler));
   }
 
   //Add new Car
   addCar$(data: any): Observable<any> {
-    return this.http.post(API_URL + '/new' , data ).pipe(catchError(this.errorHandler));
+    return this.http.post(API_URL + '/new', data).pipe(catchError(this.errorHandler));
   }
 
   //update Car Details
-  updateCarInfo$(id:string, data:any): Observable<any> {
-    return this.http.put(API_URL + '/update' + id, data).pipe(catchError(this.errorHandler)); 
+  updateCarInfo$(id: string, data: any): Observable<any> {
+    return this.http.put(API_URL + '/update' + id, data).pipe(catchError(this.errorHandler));
   }
   //delete car
-  deleteCarById$(id: string): Observable<any>{
+  deleteCarById$(id: string): Observable<any> {
     return this.http.delete(API_URL + '/' + id).pipe(catchError(this.errorHandler));
   }
   //catch errors
-  errorHandler(error:any) {
+  errorHandler(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       errorMessage = error.error.message;

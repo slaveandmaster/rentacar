@@ -8,7 +8,7 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  top: any [];
+  top: any[];
   constructor(private carService: CarsService, private notifyService: NotificationService) { }
 
   ngOnInit(): void {

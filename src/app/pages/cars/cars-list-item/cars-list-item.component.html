@@ -4,12 +4,12 @@
 
     <div class="card rounded">
         <div class="card-image">
-            <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" alt="Alternate Text" />
+            <img class="img-fluid" src="{{car.image}}" alt="Alternate Text" />
         </div>
         <div class="card-image-overlay m-auto">
             <span class="card-detail-badge">{{car['type'].name}}</span>
             <span class="card-detail-badge">{{car.transmission}}</span>
-            <span class="card-detail-badge">{{car.price}}</span>
+            <span class="card-detail-badge">{{car.price}} euro/day</span>
         </div>
         <div class="card-body text-center">
             <div class="ad-title m-auto">

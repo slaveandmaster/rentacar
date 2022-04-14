@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.editForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)]),
       isAdmin: new FormControl('false', [Validators.required])
     })
@@ -42,7 +42,7 @@ export class UsersComponent implements OnInit {
   get f() {
     return this.editForm.value;
   }
-//show edit form and load data
+  //show edit form and load data
   showEdit(id: string): void {
     this.userService.getUserData$(id).subscribe(user => this.userInfo = user)
     this.isClickEdit = !this.isClickEdit;
@@ -61,7 +61,7 @@ export class UsersComponent implements OnInit {
     }
 
   }
-//update user info
+  //update user info
   updateUser(id: string): void {
 
     const data = {

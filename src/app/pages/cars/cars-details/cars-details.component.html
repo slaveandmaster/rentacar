@@ -1,71 +1,85 @@
 <div class="content" *ngIf="!!car">
-<div class="card mb-auto shadow p-3 mb-5 bg-body rounded" style="max-width: 740px;">
-    
-    <div class="row g-0">
-      <div class="col-md-5 shadow p-3 mb-5 bg-body rounded">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbpmdCzvI6XVcajdpAU8vGz2sm6Ejit_JzrA&usqp=CAU" class="img-fluid img-thumbnail" alt="...">
-      </div>
-      
-                <div class="col-md-7">
-        <div class="card-body">
-          <h5 class="card-title">{{car.model}}</h5>
-           
-          <!-- <p class="card-text">This is a wider card with supporting text</p> -->
-          <p class="fw-bolder"><span class="card-detail-badge">Year: </span><small class="text-muted">{{car.year}}</small></p>
-            <p class="fw-bolder"><span class="card-detail-badge">Type: </span><small class="text-muted">{{car['type'].name}}</small></p>
-            <p class="fw-bolder"><span class="card-detail-badge">Seats: </span><small class="text-muted">{{car.numberOfSeats}}</small></p>
-            <p class="fw-bolder"><span class="card-detail-badge">Doors: </span><small class="text-muted">{{car.numberOfDoors}}</small></p>
-            <p class="fw-bolder"><span class="card-detail-badge">Car Number: </span><small class="text-muted">{{car.numberInStock}}</small></p>
-            <p class="fw-bolder"><span class="card-detail-badge">Transmission: </span><small class="text-muted">{{car.transmission}}</small></p>
-            <p class="fw-bolder"><span class="card-detail-badge">AirConditioner: </span><small class="text-muted">{{car.airConditioner ? 'Yes': 'No'}}</small></p>
-            <p class="fw-bolder"><span class="card-detail-badge">Price: </span><small class="text-muted">{{car.price}} euro</small></p>
-            <button type="button" class="btn btn-primary" name="reserve" *ngIf="!isClickRent" (click)="showReserve()" id=""> Rent A Car</button>
-            <ng-container *ngIf="isClickRent">
-                 <form [formGroup]="reserveForm" (ngSubmit)="onSubmit()" novalidate>
-                     <div class="form-group row">
-                        <div class="form-group">
-                            <label for="car">Car:</label>
-                            <select formControlName="car" class="form-control">                             
-                                <option [ngValue]="car._id"  selected>{{car.model}}</option>
-                            </select>
+    <div class="card mb-auto shadow p-3 mb-5 bg-body rounded" style="max-width: 740px;">
+
+        <div class="row g-0">
+            <div class="col-md-5 shadow p-3 mb-5 bg-body rounded">
+                <img src="{{car.image}}" class="img-fluid img-thumbnail" alt="...">
+            </div>
+
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h5 class="card-title">{{car.model}}</h5>
+
+                    <p class="fw-bolder"><span class="card-detail-badge">Year: </span><small
+                            class="text-muted">{{car.year}}</small></p>
+                    <p class="fw-bolder"><span class="card-detail-badge">Type: </span><small
+                            class="text-muted">{{car['type'].name}}</small></p>
+                    <p class="fw-bolder"><span class="card-detail-badge">Seats: </span><small
+                            class="text-muted">{{car.numberOfSeats}}</small></p>
+                    <p class="fw-bolder"><span class="card-detail-badge">Doors: </span><small
+                            class="text-muted">{{car.numberOfDoors}}</small></p>
+                    <p class="fw-bolder"><span class="card-detail-badge">Car Number: </span><small
+                            class="text-muted">{{car.numberInStock}}</small></p>
+                    <p class="fw-bolder"><span class="card-detail-badge">Transmission: </span><small
+                            class="text-muted">{{car.transmission}}</small></p>
+                    <p class="fw-bolder"><span class="card-detail-badge">AirConditioner: </span><small
+                            class="text-muted">{{car.airConditioner ? 'Yes': 'No'}}</small></p>
+                    <p class="fw-bolder"><span class="card-detail-badge">Price: </span><small
+                            class="text-muted">{{car.price}} euro/day</small></p>
+                    <button type="button" class="btn btn-primary" name="reserve" *ngIf="!isClickRent"
+                        (click)="showReserve()" id="" [disabled]="car.isRented"> {{car.isRented == false ? 'Rent A Car':'Busy'}}</button>
+                    <ng-container *ngIf="isClickRent">
+                        <form [formGroup]="reserveForm" (ngSubmit)="onSubmit()" novalidate>
+                            <div class="form-group row">
+                                <div class="form-group">
+                                    <label for="car">Car:</label>
+                                    <select formControlName="car" class="form-control">
+                                        <option [ngValue]="car._id" selected>{{car.model}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="names">Names: </label>
+                                    <input class="form-control" type="text" name="names" placeholder="John Smith"
+                                        formControlName="names">
+                                    <ng-container *ngIf="f['names'].errors && f['names'].touched || f['names'].dirty">
+                                        <p *ngIf="f['names'].errors?.['required']" class="error">
+                                            Name is required!
+                                        </p>
+                                    </ng-container>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="date">Date: </label>
+                                    <input class="form-control" type="text" name="date" placeholder="Choose date"
+                                        formControlName="date">
+                                    <ng-container *ngIf="f['date'].errors && f['date'].touched || f['date'].dirty">
+                                        <p *ngIf="f['date'].errors?.['required']" class="error">
+                                            date is required!
+                                        </p>
+                                    </ng-container>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="days">Days: </label>
+                                    <input class="form-control" type="text" name="days" placeholder="Days"
+                                        formControlName="days">
+                                    <ng-container *ngIf="f['days'].errors && f['days'].touched || f['days'].dirty">
+                                        <p *ngIf="f['days'].errors?.['required']" class="error">
+                                            days is required!
+                                        </p>
+                                    </ng-container>
+                                </div>
+                                <div class="form-group mt-2">
+
+                                    <button type="submit" class="btn btn-primary padding-top" name="reserve"
+                                        (ngSubmit)="onSubmit()" id="reserve"
+                                        [disabled]="reserveForm.invalid">Reserve</button>
+                                    <button type="button" class="btn btn-danger padding-top" name="cancel"
+                                        (click)="showReserve()" id="cancel">Cancel</button>
+                                </div>
                             </div>
-                 <div class="form-group">
-                    <label class="form-label" for="names">Names: </label>
-                <input class="form-control"  type="text" name="names" placeholder="John Smith" formControlName="names">
-                <ng-container *ngIf="f['names'].errors && f['names'].touched || f['names'].dirty">
-                    <p *ngIf="f['names'].errors?.['required']" class="error">
-                        Name is required!
-                    </p>
-                </ng-container>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="date">Date: </label>
-                <input class="form-control" type="text" name="date" placeholder="Choose date" formControlName="date">
-                <ng-container *ngIf="f['date'].errors && f['date'].touched || f['date'].dirty">
-                    <p *ngIf="f['date'].errors?.['required']" class="error">
-                        date is required!
-                    </p>
-                </ng-container>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="days">Days: </label>
-                <input class="form-control" type="text"  name="days" placeholder="Days" formControlName="days">
-                <ng-container *ngIf="f['days'].errors && f['days'].touched || f['days'].dirty">
-                    <p *ngIf="f['days'].errors?.['required']" class="error">
-                        days is required!
-                    </p>
-                </ng-container>
-            </div>
-            <div class="form-group mt-2">
+                        </form>
+                    </ng-container>
 
-                <button type="submit" class="btn btn-primary padding-top" name="reserve" (ngSubmit)="onSubmit()" id="reserve" [disabled]="reserveForm.invalid">Reserve</button>
-                <button type="button" class="btn btn-danger padding-top" name="cancel" (click)="showReserve()" id="cancel">Cancel</button>
+                </div>
             </div>
-            </div>
-            </form>
-        </ng-container>
-
         </div>
-      </div>
-    </div>
     </div>

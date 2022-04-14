@@ -14,8 +14,8 @@ import { ToastrService } from 'ngx-toastr'
 export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup = this.formBuilder.group({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(5)])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(5)])
   });
   isLoggedIn = false;
   isLogginFailed = false;
@@ -58,5 +58,9 @@ export class LoginComponent implements OnInit {
         this.notifyService.showError(this.errorMessage, 'Warning');
       }
     })
+  }
+
+  get f() {
+    return this.loginFormGroup.controls;
   }
 }

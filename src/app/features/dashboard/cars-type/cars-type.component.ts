@@ -20,7 +20,7 @@ export class CarsTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.typeForm = new FormGroup({
-      name: new FormControl('',[Validators.required])
+      name: new FormControl('', [Validators.required])
     })
 
     this.carService.getAllTypes$().subscribe((types) => {
@@ -63,32 +63,32 @@ export class CarsTypeComponent implements OnInit {
     this.isClickEdit = !this.isClickEdit
   }
   updateType(id: string): void {
-      const data = {
-        name: this.typeForm.value.name.trim()
+    const data = {
+      name: this.typeForm.value.name.trim()
+    }
+    this.carService.updateTypeById$(id, data).pipe(
+      switchMap(() => this.carService.getAllTypes$())
+    ).subscribe({
+      next: type => {
+        this.types = type;
+        console.log('Done')
+        this.notifyService.showSuccess('Successfully updated!', 'Success');
+        this.cancelEdit();
+      },
+      error: err => {
+        console.log(err);
       }
-      this.carService.updateTypeById$(id, data).pipe(
-        switchMap(() => this.carService.getAllTypes$())
-      ).subscribe({
-        next: type => {
-          this.types = type;
-          console.log('Done')
-          this.notifyService.showSuccess('Successfully updated!', 'Success');
-          this.cancelEdit();
-        },
-        error: err => {
-          console.log(err);
-          }
-      })
+    })
   }
   deleteType(id: string): void {
     this.carService.deleteTypeById$(id).pipe(
-      switchMap(()=> this.carService.getAllTypes$())
+      switchMap(() => this.carService.getAllTypes$())
     ).subscribe({
-      next: data=> {
-          this.types = data;
-          this.notifyService.showSuccess('Record was Deleted', 'Success');
+      next: data => {
+        this.types = data;
+        this.notifyService.showSuccess('Record was Deleted', 'Success');
       },
-      error: err=>{
+      error: err => {
         console.log(err);
       }
     });

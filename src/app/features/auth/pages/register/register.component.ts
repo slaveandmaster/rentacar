@@ -11,7 +11,7 @@ import { emailValidator, passwordMatch } from '../../util';
 })
 export class RegisterComponent implements OnInit {
 
-  
+
   passwordControl = new FormControl(null, [Validators.required, Validators.minLength(5)]);
 
   get passwordsGroup(): FormGroup {
@@ -19,14 +19,11 @@ export class RegisterComponent implements OnInit {
   }
 
   registerFormGroup: FormGroup = this.formBuilder.group({
-    'username': new FormControl(null, [Validators.required, Validators.minLength(5)]),
-    'email': new FormControl(null, [Validators.required, emailValidator]),
+    'email': new FormControl(null, [Validators.required, Validators.email]),
     'passwords': new FormGroup({
       'password': this.passwordControl,
-      'rePassword': new FormControl(null, [passwordMatch(this.passwordControl)]),
+      'rePassword': new FormControl(null, [Validators.required,passwordMatch(this.passwordControl)]),
     }),
-    'tel': new FormControl(''),
-    'telRegion': new FormControl('')
   })
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
@@ -41,7 +38,7 @@ export class RegisterComponent implements OnInit {
   handleRegister(): void {
     const { email, passwords } = this.registerFormGroup.value;
 
-       this.authService.register(email, passwords.password).subscribe(() => {
+    this.authService.register(email, passwords.password).subscribe(() => {
       this.router.navigate(['/']);
     })
 

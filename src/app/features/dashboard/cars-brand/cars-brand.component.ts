@@ -12,16 +12,16 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class CarsBrandComponent implements OnInit {
 
-  constructor(private carService: CarsService,private router: Router, private notifyService: NotificationService) { }
-   brands: any[] = [];
-   brandForm: FormGroup;
-   isClickEdit: Boolean = false;
-   isClickAdd: Boolean = false;
-   brandInfo: any;
+  constructor(private carService: CarsService, private router: Router, private notifyService: NotificationService) { }
+  brands: any[] = [];
+  brandForm: FormGroup;
+  isClickEdit: Boolean = false;
+  isClickAdd: Boolean = false;
+  brandInfo: any;
 
   ngOnInit(): void {
     this.brandForm = new FormGroup({
-      name: new FormControl('',[Validators.required])
+      name: new FormControl('', [Validators.required])
     })
 
     this.carService.getAllBrands$().subscribe((brands) => {
@@ -69,32 +69,32 @@ export class CarsBrandComponent implements OnInit {
     this.isClickEdit = !this.isClickEdit
   }
   updateBrand(id: string): void {
-      const data = {
-        name: this.brandForm.value.name.trim()
+    const data = {
+      name: this.brandForm.value.name.trim()
+    }
+    this.carService.updateBrandById$(id, data).pipe(
+      switchMap(() => this.carService.getAllBrands$())
+    ).subscribe({
+      next: brand => {
+        this.brands = brand;
+        console.log('Done')
+        this.notifyService.showSuccess('Successfully updated!', 'Success');
+        this.cancelEdit();
+      },
+      error: err => {
+        console.log(err);
       }
-      this.carService.updateBrandById$(id, data).pipe(
-        switchMap(() => this.carService.getAllBrands$())
-      ).subscribe({
-        next: brand => {
-          this.brands = brand;
-          console.log('Done')
-          this.notifyService.showSuccess('Successfully updated!', 'Success');
-          this.cancelEdit();
-        },
-        error: err => {
-          console.log(err);
-          }
-      })
+    })
   }
   deleteBrand(id: string): void {
     this.carService.deleteBrandById$(id).pipe(
-      switchMap(()=> this.carService.getAllBrands$())
+      switchMap(() => this.carService.getAllBrands$())
     ).subscribe({
-      next: data=> {
-          this.brands = data;
-          this.notifyService.showSuccess('Record was Deleted', 'Success');
+      next: data => {
+        this.brands = data;
+        this.notifyService.showSuccess('Record was Deleted', 'Success');
       },
-      error: err=>{
+      error: err => {
         console.log(err);
       }
     });

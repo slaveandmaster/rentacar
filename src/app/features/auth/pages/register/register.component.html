@@ -13,7 +13,7 @@
 
         <ng-container
             *ngIf="shouldShowErrorForControl('email')">
-            <p *ngIf="registerFormGroup.controls['email'].errors" class="error">
+            <p *ngIf="registerFormGroup.controls['email'].errors?.['required']" class="error">
                 Email is required!
             </p>
             <p *ngIf="registerFormGroup.controls['email'].errors" class="error">
@@ -30,10 +30,10 @@
             </p>
             
             <ng-container *ngIf="shouldShowErrorForControl('password', passwordsGroup)">
-                <p *ngIf="passwordsGroup.controls['password'].errors" class="error">
+                <p *ngIf="passwordsGroup.controls['password'].errors?.['required']" class="error">
                     Password is required!
                 </p>
-                <p *ngIf="passwordsGroup.controls['password'].errors"  class="error">
+                <p *ngIf="passwordsGroup.controls['password'].errors?.['minlength']"  class="error">
                     Password must be at least 5 characters!
                 </p>
             </ng-container>
@@ -43,7 +43,7 @@
             <p class="field field-icon">
                 <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
                 <input formControlName="rePassword" type="password" name="rePassword" id="rePassword"
-                    placeholder="******">
+                    placeholder="******" required>
             </p>
 
             <ng-container *ngIf="shouldShowErrorForControl('rePassword', passwordsGroup)">
@@ -51,7 +51,7 @@
             </ng-container>
         </div>
 
-        <button [disabled]="">Create Account</button>
+        <button class="btn btn-primary" [disabled]="registerFormGroup.invalid">Create Account</button>
 
         <p class="text-center">
             Have an account?

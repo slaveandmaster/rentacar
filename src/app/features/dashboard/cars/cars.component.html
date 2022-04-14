@@ -1,6 +1,6 @@
 <button class="btn btn-primary" (click)="showAddForm()" *ngIf="!isClickEdit">Add Car</button>
 <table class="table caption-top" *ngIf="cars.length !=0 && !isClickAdd && !isClickEdit;else noCarsItem">
-  <caption>List of Car Types</caption>
+  <caption>List of Car</caption>
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -50,7 +50,7 @@
         <input class="form-control" type="text" name="model" placeholder="VW" formControlName="model">
         <ng-container *ngIf="f['model'].errors && f['model'].touched || f['model'].dirty">
           <p *ngIf="f['model'].errors?.['required']" class="error">
-            Name is required!
+            Model is required!
           </p>
         </ng-container>
       </div>

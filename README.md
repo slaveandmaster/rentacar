@@ -1,7 +1,53 @@
 # RentaCar
-
+Rent A Car is simple rent a car system  based on Angular. This is simple project for Angular course.
+Rent A Car user backend <link to be added>
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
+# General functionality:
+
+Authenticate users via JWT (login/signup pages + logout button on navigation menu)
+CRUD Users (sign up & settings page - management users from dashboard)
+CRUD Cars (add, read, delete, update cars)
+CRUD Car Brand
+CRUD Car Type Brand
+GET and display top rented car on home page
+GET and display catalog with all cars in invetory
+GET user profile rents and user information
+Simple Dashboard
+
+# The general page breakdown looks like this:
+
+Home page (URL: /#/ )
+List of top rented cars and 
+simple info for the firm
+Sign in/Sign up pages and Logout (URL: /#/login, /#/register )
+Uses JWT (store the token in localStorage)
+Dashboard (URL: /#/dashboard )
+Manage Users
+Manage Cars
+Manage Car Brand
+Manage Car Type
+Cars page (URL: /#/cars )
+Show all cars from inventory
+Show car details
+Make reservation 
+Profile page (URL: /#/profile)
+Show basic user info
+Show all user`s rent
+
+# Technologies and stuff
+Frontend
+Angular 13
+CSS
+Fontawsome
+Ngx-Toastr
+
+
+Backend
+MongoDB Compass
+Mongoose
+Node.JS
+Express
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

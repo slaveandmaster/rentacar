@@ -1,91 +1,108 @@
-<table class="table caption-top"> 
+<table class="table caption-top">
   <caption>List of Users</caption>
   <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">Email</th>
-        <th scope="col">isAdmin</th>
-        <th scope="col">Action</th>
-       
-      </tr>
-    </thead>
-    <tbody >
-      <tr *ngFor="let user of users ; let idx = index">
-        <th scope="row">{{idx}}</th>
-        <td>{{user.email}}</td>
-        <td>{{user.isAdmin ? 'Yes' : 'No'}}</td>
-        <td><button class="btn btn-warning" (click)="showEdit(user._id)" *ngIf="!isClickEdit">Edit</button><button class="btn btn-danger" (click)="deleteUser(user._id)"> Delete</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-    <div class="submit-form" *ngIf="isClickEdit && !!userInfo">
-      <form [formGroup]="editForm" novalidate>
-        <div >
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-            type="text"
-            class="form-control"
-            id="email"
-            required
-           
-            name="email"
-            formControlName="email"
-            [(ngModel)]="userInfo.email"
-            />
-          </div>
+      <th scope="col">#</th>
+      <th scope="col">Email</th>
+      <th scope="col">isAdmin</th>
+      <th scope="col">Action</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users ; let idx = index">
+      <th scope="row">{{idx}}</th>
+      <td>{{user.email}}</td>
+      <td>{{user.isAdmin ? 'Yes' : 'No'}}</td>
+      <td><button class="btn btn-warning" (click)="showEdit(user._id)" *ngIf="!isClickEdit">Edit</button><button
+          class="btn btn-danger" (click)="deleteUser(user._id)"> Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <!-- TODO ADD FORM
+  <div class="submit-form" *ngIf="isClickEdit && !!userInfo">
+    <form [formGroup]="editForm" novalidate>
+      <div>
         <div class="form-group">
-          <label for="password">Password</label>
-          <input
-          class="form-control"
-          id="password"
-          required
-          type="password"
-          name="password"
-          formControlName="password"
-          
-          />
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" required name="email" formControlName="email"
+            [(ngModel)]="userInfo.email" />
         </div>
         <ng-container
-            *ngIf="(editForm.controls['password'].dirty || editForm.controls['password'].touched) && editForm.controls['password'].invalid">
-            <p *ngIf="editForm.controls['password'].errors && editForm.controls['password'].touched" class="error">
-                Password is required!
-            </p>
-            <p *ngIf="editForm.controls['password'].errors" class="error">
-              Password must be at least 5 characters!
-            </p>
-          </ng-container>
+          *ngIf="(editForm.controls['email'].dirty || editForm.controls['email'].touched) && editForm.controls['email'].invalid">
+          <p *ngIf="editForm.controls['email'].errors?.['required']" class="error">
+            Email is required!
+          </p>
+          <p *ngIf="editForm.controls['email'].invalid" class="error">
+            Email is invalid!
+          </p>
+        </ng-container>
         <div class="form-group">
-            <label for="isAdmin">is Admin </label>
-            <div *ngIf="userInfo.isAdmin;else notAdminTemplate">
-                <input type="checkbox"
-                  id="isAdmin"
-                  name="isAdmin"
-                  checked
-                  formControlName="isAdmin"
-                  (change)="onCheckChange($event)"
-                  value="false"
-                  />
-            </div>
-          </div>
-        <button  class="btn btn-success"  (click)="updateUser(userInfo._id)">Update</button>
+          <label for="password">Password</label>
+          <input class="form-control" id="password" required type="password" name="password"
+            formControlName="password" />
+        </div>
+        <ng-container
+          *ngIf="(editForm.controls['password'].dirty || editForm.controls['password'].touched) && editForm.controls['password'].invalid">
+          <p *ngIf="editForm.controls['password'].errors?.['required']" class="error">
+            Password is required!
+          </p>
+          <p *ngIf="editForm.controls['password'].errors?.['minlength']" class="error">
+            Password must be at least 5 characters!
+          </p>
+        </ng-container>
+        <div class="form-group">
+          <label for="isAdmin">is Admin </label>
+          <input type="checkbox" id="isAdmin" name="isAdmin" formControlName="isAdmin" (change)="onCheckChange($event)"
+            [(ngModel)]="userInfo.isAdmin" />
+        </div>
+        <button class="btn btn-success" [disabled]="editForm.invalid" (click)="updateUser(userInfo._id)">Update</button>
+        <button class="btn btn-danger" (click)="cancelEdit()"> Cancel </button>
+      </div>
+    </form>
+  </div> -->
+  <div class="submit-form" *ngIf="isClickEdit && !!userInfo">
+    <form [formGroup]="editForm" novalidate>
+      <div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" required name="email" formControlName="email"
+            [(ngModel)]="userInfo.email" />
+        </div>
+        <ng-container
+          *ngIf="(editForm.controls['email'].dirty || editForm.controls['email'].touched) && editForm.controls['email'].invalid">
+          <p *ngIf="editForm.controls['email'].errors?.['required']" class="error">
+            Email is required!
+          </p>
+          <p *ngIf="editForm.controls['email'].invalid" class="error">
+            Email is invalid!
+          </p>
+        </ng-container>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" id="password" required type="password" name="password"
+            formControlName="password" />
+        </div>
+        <ng-container
+          *ngIf="(editForm.controls['password'].dirty || editForm.controls['password'].touched) && editForm.controls['password'].invalid">
+          <p *ngIf="editForm.controls['password'].errors?.['required']" class="error">
+            Password is required!
+          </p>
+          <p *ngIf="editForm.controls['password'].errors?.['minlength']" class="error">
+            Password must be at least 5 characters!
+          </p>
+        </ng-container>
+        <div class="form-group">
+          <label for="isAdmin">is Admin </label>
+          <input type="checkbox" id="isAdmin" name="isAdmin" formControlName="isAdmin" (change)="onCheckChange($event)"
+            [(ngModel)]="userInfo.isAdmin" />
+        </div>
+        <button class="btn btn-success" [disabled]="editForm.invalid" (click)="updateUser(userInfo._id)">Update</button>
         <button class="btn btn-danger" (click)="cancelEdit()"> Cancel </button>
       </div>
     </form>
   </div>
-  
+
 </div>
 <button class="btn btn-primary" [routerLink]="['/dashboard']" *ngIf="!isClickEdit">Back to Dashboard</button>
-  <ng-template #notAdminTemplate>
-      <div>
-        <input type="checkbox"
-        id="isAdmin"
-        name="isAdmin"
-    (change)="onCheckChange($event)"
-    value="true"
-    
-    />
-  </div>
-  </ng-template>
-  
