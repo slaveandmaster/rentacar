@@ -1,13 +1,19 @@
 # RentaCar
 Rent A Car is simple rent a car system  based on Angular. This is simple project for Angular course.
+
 Rent A Car user backend <link to be added>
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
 # General functionality:
 
 Authenticate users via JWT (login/signup pages + logout button on navigation menu)
 
+<<<<<<< HEAD
+*RUD Users (sign up & settings page - management users from dashboard)
+=======
 CRUD Users (sign up & settings page - management users from dashboard)
+>>>>>>> b20399cfc2d3d39119a41bdaa27c6950e08f10d7
 
 CRUD Cars (add, read, delete, update cars)
 
@@ -21,21 +27,25 @@ GET and display catalog with all cars in invetory
 
 GET user profile rents and user information
 
+<<<<<<< HEAD
+Simple Dashboard with rent list, users, cars, brands and car types
+=======
 Simple Dashboard
+>>>>>>> b20399cfc2d3d39119a41bdaa27c6950e08f10d7
 
 # The general page breakdown looks like this:
 
-Home page (URL: /#/ )
+Home page (URL: / )
 
 List of top rented cars and 
 
 simple info for the firm
 
-Sign in/Sign up pages and Logout (URL: /#/login, /#/register )
+Sign in/Sign up pages and Logout (URL: /login, /register )
 
 Uses JWT (store the token in localStorage)
 
-Dashboard (URL: /#/dashboard )
+Dashboard (URL: /dashboard )
 
 Manage Users
 
@@ -45,7 +55,9 @@ Manage Car Brand
 
 Manage Car Type
 
-Cars page (URL: /#/cars )
+RentList
+
+Cars page (URL: /cars )
 
 Show all cars from inventory
 
@@ -53,7 +65,7 @@ Show car details
 
 Make reservation 
 
-Profile page (URL: /#/profile)
+Profile page (URL: /profile)
 
 Show basic user info
 
