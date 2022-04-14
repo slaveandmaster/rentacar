@@ -9,15 +9,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Authenticate users via JWT (login/signup pages + logout button on navigation menu)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 *RUD Users (sign up & settings page - management users from dashboard)
-=======
-CRUD Users (sign up & settings page - management users from dashboard)
->>>>>>> b20399cfc2d3d39119a41bdaa27c6950e08f10d7
-=======
-*RUD Users (sign up & settings page - management users from dashboard)
->>>>>>> fb349330f1c7c79e88a3ab72ef0b1f1109d8e8bc
 
 CRUD Cars (add, read, delete, update cars)
 
@@ -31,16 +24,8 @@ GET and display catalog with all cars in invetory
 
 GET user profile rents and user information
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-Simple Dashboard with rent list, users, cars, brands and car types
-=======
-Simple Dashboard
->>>>>>> b20399cfc2d3d39119a41bdaa27c6950e08f10d7
-=======
 Simple Dashboard with rent list, users, cars, brands and car types
 
->>>>>>> fb349330f1c7c79e88a3ab72ef0b1f1109d8e8bc
 
 # The general page breakdown looks like this:
 
