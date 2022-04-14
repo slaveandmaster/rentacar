@@ -18,6 +18,7 @@ Simple Dashboard
 # The general page breakdown looks like this:
 
 Home page (URL: /#/ )
+
 List of top rented cars and 
 simple info for the firm
 Sign in/Sign up pages and Logout (URL: /#/login, /#/register )
