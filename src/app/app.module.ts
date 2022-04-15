@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AboutComponent } from './pages/about/about.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 //import { CarsModule } from './pages/cars/cars.module';
 
 
@@ -36,8 +37,10 @@ import { AboutComponent } from './pages/about/about.component';
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    NgxSpinnerModule
    // CarsModule
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
     provide: HTTP_INTERCEPTORS,

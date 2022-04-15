@@ -1,4 +1,6 @@
 <div class="container" >
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "small" color = "#3da" type = "square-jelly-box" [fullScreen] = "false">
+        <p style="color: white" >Loading...</p></ngx-spinner>
     <ul class="cards">
         <app-cars-list-item *ngFor="let car of cars" [car]="car"></app-cars-list-item>
     </ul>     
