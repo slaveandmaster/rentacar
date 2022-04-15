@@ -10,33 +10,44 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'home',
-},
-  { path: '', 
-  loadChildren: () => import('./features/auth/auth.module').then(m=>m.AuthModule)},
-  { path: 'dashboard', 
-  loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: '', 
-  loadChildren: () => import('./pages/cars/cars.module').then(m => m.CarsModule) },
-{
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./features/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/cars/cars.module').then((m) => m.CarsModule),
+  },
+  {
     path: 'home',
-    component: HomeComponent
-},
-{
-  path: 'about',
-  component: AboutComponent
-},
-{
-  path: 'contact',
-  component: ContactComponent
-},
-{
+    component: HomeComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+  },
+  {
     path: '**',
-    component: PageNotFoundComponent
-}
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
