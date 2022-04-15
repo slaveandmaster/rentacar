@@ -76,6 +76,7 @@ Fontawsome
 
 Ngx-Toastr
 
+Ngx-spinner
 
 ## Backend
 
